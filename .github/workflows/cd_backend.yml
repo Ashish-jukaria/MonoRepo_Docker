@@ -1,0 +1,32 @@
+name: Pushing to DockerHub
+
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: action/checkout@v2
+
+            - name: Login-to-Docker
+              uses: docker/login-action@v2
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+            - name: Push to Docker
+              uses: docker/build-push-action@v4
+              with:
+                context: .
+                file: ./docker/Dockerfile.backend
+                push: true
+                tags: ashish/app-backend:${{ github.sha }}
+                    
+
+            
+
+

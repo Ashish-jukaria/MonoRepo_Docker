@@ -1,0 +1,31 @@
+{
+  "name": "y",
+  "private": true,
+  "type": "module",
+
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "prisma": "cd packages/db && npx prisma generate && cd ../..",    
+    "backend":"cd apps/http && node index.js",
+    "websocket":"cd apps/ws && node index.js",
+    "frontend":"cd apps/web && npm run start"
+
+
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0",
+    "turbo": "^2.4.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
